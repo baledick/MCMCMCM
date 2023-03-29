@@ -22,7 +22,12 @@ def conditional_distribution_1(x):
 def conditional_distribution_2(x):
     return np.random.normal(x[0], 1)
 
+
+proposal_distributions = [proposal, proposal]
+
+
 conditional_distributions = [conditional_distribution_1, conditional_distribution_2]
+
 
 ## Initialising the class and starting the examples
 
@@ -37,8 +42,6 @@ mcmc.trace_plot(samples_mh, title='Metropolis-Hastings')
 
 
 # Gibbs Sampling
-conditional_distributions = [lambda x: np.random.normal(x[1], 1), lambda x: np.random.normal(x[0], 1)]
-
 samples_gibbs = mcmc.gibbs_sampling(conditional_distributions, init, n_samples = 500)
 
 mcmc.scatter_plot(samples_gibbs, title='Gibbs Sampling')
@@ -71,10 +74,6 @@ mcmc.trace_plot(samples_hmc, title='Hamiltonian Monte Carlo (HMC)')
 
 
 # Metropolis-Within-Gibbs
-conditional_distributions = [lambda x: np.random.normal(x[1], 1), lambda x: np.random.normal(x[0], 1)]
-
-proposal_distributions = [proposal, proposal]
-
 samples_metropolis_within_gibbs = mcmc.metropolis_within_gibbs(init, conditional_distributions, proposal_distributions, n_samples=500)
 
 mcmc.scatter_plot(samples_metropolis_within_gibbs, title='Metropolis-Within-Gibbs')
