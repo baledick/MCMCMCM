@@ -17,25 +17,28 @@ The class requires the following Python packages:
 
 Install these packages using pip:
 
-`pip install numpy matplotlib tqdm`
+```bash
+pip install numpy matplotlib tqdm
+```
 
 or
 
-`pip install -r "requirements.txt"`
+```bash
+pip install -r "requirements.txt"
+```
 
 ## Usage
 
 1.  Import the `MCMCMethods` class:
 
-python
-
-`from mcmc_methods import MCMCMethods`
+```python
+from mcmc_methods import MCMCMethods
+```
 
 2.  Define your target distribution, its gradient (if applicable), proposal distribution (for Metropolis-Hastings), and initial state:
 
-python
-
-`def target_distribution(x):
+```python
+def target_distribution(x):
     # ...
 
 def target_distribution_grad(x):
@@ -45,48 +48,40 @@ def proposal(x):
     # ...
 
 def init():
-    # ...`
+    # ...
+```
 
 3.  Create an instance of the `MCMCMethods` class:
 
-python
-
-`mcmc = MCMCMethods(target_distribution, target_distribution_grad)`
+```python
+mcmc = MCMCMethods(target_distribution, target_distribution_grad)
+```
 
 4.  Generate samples using the desired MCMC method:
 
 -   Metropolis-Hastings:
 
-python
-
-`samples_mh = mcmc.metropolis_hastings(init, proposal, 5000)`
+```python
+samples_mh = mcmc.metropolis_hastings(init, proposal, 5000)
+```
 
 -   Gibbs Sampling:
 
-python
-
-`samples_gibbs = mcmc.gibbs_sampling(conditional_distributions, init, 5000)`
+```python
+samples_gibbs = mcmc.gibbs_sampling(conditional_distributions, init, 5000)
+```
 
 -   Slice Sampling:
 
-python
-
-`samples_slice = mcmc.slice_sampling(init, width=1, n_samples=5000)`
+```python
+samples_slice = mcmc.slice_sampling(init, width=1, n_samples=5000)
+```
 
 -   MALA:
 
-python
-
-`step_size = 0.1
-samples_mala = mcmc.mala(init, step_size, 5000)`
-
-5.  Trace the sampling path in real time or plot the results after generating the samples:
-
-python
-
-`mcmc.trace_plot(samples_mh, title='Metropolis-Hastings', realtime=False, subplots=True, subplot_idx=0)`
-
-Set `realtime=True` to trace the sampling path in real time, and `realtime=False` to plot the results after generating the samples. Pass `subplots=True` and provide a `subplot_idx` parameter to display the results as subplots.
+```python
+samples_mala = mcmc.mala(init, step_size = 0.1, 5000)
+```
 
 ## Example
 
