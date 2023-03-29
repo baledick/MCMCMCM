@@ -154,7 +154,7 @@ Performs Metropolis-Adjusted Langevin Algorithm (MALA) sampling.
 
 Returns: A list of generated samples.
 
-### `hmc(self, init, step_size, num_steps, n_samples, burn_in=0, thinning=1)`
+#### `hmc(self, init, step_size, num_steps, n_samples, burn_in=0, thinning=1)`
 
 Performs Hamiltonian Monte Carlo (HMC) sampling.
 
