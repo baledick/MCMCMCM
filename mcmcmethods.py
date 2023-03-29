@@ -95,6 +95,58 @@ class MCMCMethods:
 
 
 
+    def hmc(self, init, step_size, num_steps, n_samples, burn_in=0, thinning=1):
+        if self.target_distribution_grad is None:
+            raise ValueError("A gradient function for the target distribution must be provided for HMC.")
+
+        x = init()
+        dimension = len(x)
+        samples = []
+
+        for _ in tqdm(range(n_samples * thinning + burn_in)):
+            p = np.random.normal(0, 1, size=dimension)
+            x_new = x.copy()
+            p_new = p.copy()
+
+            for _ in range(num_steps):
+                p_new -= step_size * self.target_distribution_grad(x_new) / 2
+                x_new += step_size * p_new
+                p_new -= step_size * self.target_distribution_grad(x_new) / 2
+
+            hamiltonian_old = -np.log(self.target_distribution(x)) + 0.5 * np.dot(p, p)
+            hamiltonian_new = -np.log(self.target_distribution(x_new)) + 0.5 * np.dot(p_new, p_new)
+            acceptance_ratio = np.exp(hamiltonian_old - hamiltonian_new)
+
+            if np.random.rand() < acceptance_ratio:
+                x = x_new
+
+            if _ >= burn_in:
+                samples.append(x)
+
+        return samples
+
+
+
+
+    def metropolis_within_gibbs(self, init, conditional_distributions, proposal_distributions, n_samples, burn_in=0, thinning=1):
+        x = init()
+        samples = []
+
+        for _ in tqdm(range(n_samples * thinning + burn_in)):
+            for i, (conditional_distribution, proposal_distribution) in enumerate(zip(conditional_distributions, proposal_distributions)):
+                x_proposal = proposal_distribution(x)
+                acceptance_ratio = (conditional_distribution(x_proposal) * proposal_distribution(x_proposal)) / (conditional_distribution(x) * proposal_distribution(x))
+
+                if np.all(np.random.rand() < acceptance_ratio):
+                    x[i] = x_proposal[i]
+
+            if _ >= burn_in:
+                samples.append(x.copy())
+
+        return samples
+
+
+
     def scatter_plot(self, samples, title='', save_path=None):
 
         fig, ax = plt.subplots()

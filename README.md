@@ -154,6 +154,32 @@ Performs Metropolis-Adjusted Langevin Algorithm (MALA) sampling.
 
 Returns: A list of generated samples.
 
+### `hmc(self, init, step_size, num_steps, n_samples, burn_in=0, thinning=1)`
+
+Performs Hamiltonian Monte Carlo (HMC) sampling.
+
+-   `init` (function): Function to generate the initial state of the Markov chain.
+-   `step_size` (float): Step size for the discretized Hamiltonian dynamics.
+-   `num_steps` (int): Number of steps for the leapfrog integrator.
+-   `n_samples` (int): Number of samples to generate.
+-   `burn_in` (int, optional): Number of initial samples to discard as burn-in. Default is 0.
+-   `thinning` (int, optional): Thinning factor to reduce the autocorrelation between samples. Default is 1.
+
+Returns: A list of generated samples.
+
+#### `metropolis_within_gibbs(self, init, conditional_distributions, proposal_distributions, n_samples, burn_in=0, thinning=1)`
+
+Performs Metropolis-Within-Gibbs sampling.
+
+-    `init` (function): Function to generate the initial state of the Markov chain.
+-    `conditional_distributions` (list of functions): List of conditional distribution functions, one for each variable. Each function should take the current state as input and return a new value for the corresponding variable.
+-    `proposal_distributions` (list of functions): List of proposal distribution functions, one for each variable. Each function should take the current state as input and return a proposal state.
+-    `n_samples` (int): Number of samples to generate.
+-    `burn_in` (int, optional): Number of initial samples to discard as burn-in. Default is 0.
+-    `thinning` (int, optional): Thinning factor to reduce the autocorrelation between samples. Default is 1.
+
+Returns: A list of generated samples.
+
 #### `scatter_plot(self, samples, title='', save_path=None)`
 
 Creates a scatter plot of the provided samples.
