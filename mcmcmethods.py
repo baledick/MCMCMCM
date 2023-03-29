@@ -2,8 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from tqdm import tqdm
-import os
-os.environ["QT_LOGGING_RULES"] = "qt.qpa.wayland.warning=false"
+
 
 class MCMCMethods:
 

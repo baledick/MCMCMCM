@@ -174,3 +174,23 @@ Creates a trace plot of the provided samples.
 -   `save_path` (str, optional): Path to save the plot as an image file. If not provided, the plot will not be saved.
 
 Returns: None. The function directly displays the trace plot using `plt.show()`.
+
+## Contributing
+
+We welcome contributions from fellow students! If you have implemented a new MCMC method or found a way to improve the existing code, feel free to submit a pull request. Make sure to provide a clear description of your changes and update the relevant example scripts if necessary.
+
+## Resources
+
+For students new to MCMC methods, we recommend the following resources to help you get started:
+
+- Not yet included
+- On the way
+- Class notes
+
+## References
+
+- None (for now)
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
