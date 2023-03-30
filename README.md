@@ -77,12 +77,23 @@ samples_gibbs = mcmc.gibbs_sampling(conditional_distributions, init, 5000)
 samples_slice = mcmc.slice_sampling(init, width=1, n_samples=5000)
 ```
 
--   MALA:
+-   Metropolis Adjusted Langevin Algorithm (MALA):
 
 ```python
 samples_mala = mcmc.mala(init, step_size = 0.1, 5000)
 ```
 
+-   Hamilton Monte Carlo (HMC):
+
+```python
+samples_hmc = mcmc.hmc(init, step_size = 0.1, num_steps = 10, n_samples=500)
+```
+
+-   Metropolis-Within-Gibbs:
+
+```python
+samples_metropolis_within_gibbs = mcmc.metropolis_within_gibbs(init, conditional_distributions, proposal_distributions, n_samples=500)
+```
 ## Example
 
 
